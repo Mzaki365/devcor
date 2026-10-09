@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" style="background-color: #0b0e14;">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STAR SOLUTIONS — Astronomical Observatory of Digital Systems</title>
+    <meta name="description" content="An independent architectural engineering bureau drafting bespoke web platforms, mobile software, and mission-critical enterprise systems." />
+    
+    <!-- Critical Origin Preconnects -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Pre-Hydration Celestial Brass Monogram Loader -->
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        background-color: #0b0e14;
+        color: #f4eee2;
+        overflow-x: hidden;
+      }
+      #initial-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background-color: #0b0e14;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: 'DM Mono', monospace;
+      }
+      .astrolabe-mark {
+        width: 44px;
+        height: 44px;
+        border: 1px solid #c59b56;
+        border-radius: 50%;
+        position: relative;
+        animation: rotateMark 4s cubic-bezier(0.25, 1, 0.3, 1) infinite;
+      }
+      .astrolabe-mark::after {
+        content: '';
+        position: absolute;
+        inset: 6px;
+        border: 1px dashed rgba(197, 155, 86, 0.5);
+        border-radius: 50%;
+      }
+      @keyframes rotateMark {
+        0% { transform: rotate(0deg); }
+        50% { transform: rotate(180deg); }
+        100% { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Pre-Hydration Astrolabe Marker -->
+    <div id="initial-loader">
+      <div class="astrolabe-mark"></div>
+    </div>
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const initial = document.getElementById('initial-loader');
+        if (initial) setTimeout(() => initial.remove(), 100);
+      });
+    </script>
+  </body>
+</html>
