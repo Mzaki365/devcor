@@ -7,6 +7,7 @@ import AircraftCoreEntrance from './components/AircraftCoreEntrance';
 import ReticleCursor from './components/ReticleCursor';
 import DialScrollHUD from './components/DialScrollHUD';
 import Footer from './components/Footer';
+import OfflineHUD from './components/OfflineHUD';
 import { scrollDirector } from './utils/scrollDirector';
 
 // Lazy-load below-the-fold sections
@@ -81,6 +82,9 @@ function App() {
           onComplete={handleEntranceComplete}
         />
       )}
+
+      {/* Offline PWA Network Status Badge */}
+      <OfflineHUD />
 
       {/* 3. Context-Aware Optical Lens Reticle Cursor */}
       <ReticleCursor />

@@ -126,7 +126,7 @@ export default function ServiceCard({
         />
 
         {/* ── Top meta ─────────────────────────────────────────────────── */}
-        <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 mb-6 sm:mb-8">
+        <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 mb-6 sm:mb-8 transition-transform duration-300 group-hover:translate-z-6" style={{ transform: 'translateZ(20px)' }}>
           <div className="flex items-center gap-3">
             <div
               className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center bg-white/[0.04] text-xs font-serif group-hover:border-amber-300/40 group-hover:rotate-45 transition-all duration-300 shadow-sm"
@@ -146,17 +146,17 @@ export default function ServiceCard({
         </div>
 
         {/* ── Title — typewriter ───────────────────────────────────────── */}
-        <h3 className="relative z-10 font-editorial text-2xl sm:text-3xl lg:text-4xl font-semibold text-white mb-4 leading-tight group-hover:text-amber-100 transition-colors">
+        <h3 className="relative z-10 font-editorial text-2xl sm:text-3xl lg:text-4xl font-semibold text-white mb-4 leading-tight group-hover:text-amber-100 transition-colors" style={{ transform: 'translateZ(35px)' }}>
           <TypewriterText text={service.title} charRefs={titleChars} />
         </h3>
 
         {/* ── Description — typewriter ─────────────────────────────────── */}
-        <p className="relative z-10 text-sm sm:text-base text-slate-300 font-light leading-relaxed mb-8">
+        <p className="relative z-10 text-sm sm:text-base text-slate-300 font-light leading-relaxed mb-8" style={{ transform: 'translateZ(25px)' }}>
           <TypewriterText text={service.desc} charRefs={descChars} />
         </p>
 
         {/* ── Deliverables — typewriter ────────────────────────────────── */}
-        <div className="relative z-10 space-y-3 mb-10 pt-6 border-t border-white/8">
+        <div className="relative z-10 space-y-3 mb-10 pt-6 border-t border-white/8" style={{ transform: 'translateZ(20px)' }}>
           <span className="block font-mono text-[11px] text-amber-200/70 uppercase tracking-wider mb-2">
             <TypewriterText text="Key Deliverables" charRefs={labelChars} />
           </span>
@@ -171,7 +171,7 @@ export default function ServiceCard({
         </div>
 
         {/* ── CTA Button ───────────────────────────────────────────────── */}
-        <div className="relative z-10">
+        <div className="relative z-10" style={{ transform: 'translateZ(30px)' }}>
           <button
             className="group/btn relative w-full flex items-center justify-between px-6 py-4 rounded-xl bg-white/[0.04] hover:bg-amber-200 hover:text-slate-950 border border-white/10 text-white font-medium text-xs uppercase tracking-wider transition-all duration-300 cursor-pointer group-hover:border-amber-300/40 shadow-sm overflow-hidden"
             onClick={(e) => {

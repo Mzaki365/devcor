@@ -1,0 +1,17 @@
+{
+  "short_name": "STAR 3D",
+  "name": "STAR SOLUTIONS — 3D Digital Systems Observatory",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0b0e14",
+  "theme_color": "#0b0e14",
+  "display": "standalone",
+  "orientation": "any",
+  "description": "An independent architectural engineering bureau drafting bespoke web platforms, mobile software, and mission-critical enterprise systems."
+}

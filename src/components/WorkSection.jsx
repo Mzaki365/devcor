@@ -75,7 +75,7 @@ function ProjectCard({ project, onOpenContact, index = 0 }) {
           }}
         />
 
-        <div className="relative z-10">
+        <div className="relative z-10" style={{ transform: 'translateZ(25px)' }}>
           <div className="flex items-center justify-between mb-6">
             <span className="font-mono text-xs font-semibold uppercase tracking-wider text-amber-200 px-3.5 py-1 rounded-full bg-white/[0.03] border border-amber-300/20">
               {project.category}
@@ -83,15 +83,15 @@ function ProjectCard({ project, onOpenContact, index = 0 }) {
             <span className="font-mono text-xs text-slate-400">{project.year}</span>
           </div>
 
-          <h3 className="font-editorial text-2xl sm:text-3xl font-semibold text-white group-hover:text-amber-100 transition-colors mb-3 leading-tight">
+          <h3 className="font-editorial text-2xl sm:text-3xl font-semibold text-white group-hover:text-amber-100 transition-colors mb-3 leading-tight" style={{ transform: 'translateZ(35px)' }}>
             {project.title}
           </h3>
-          <p className="text-sm sm:text-base text-slate-300 font-light leading-relaxed mb-8">
+          <p className="text-sm sm:text-base text-slate-300 font-light leading-relaxed mb-8" style={{ transform: 'translateZ(20px)' }}>
             {project.desc}
           </p>
 
           {/* Tech / Deliverable Badges with Micro-Hover Glint */}
-          <div className="flex flex-wrap gap-2 mb-8">
+          <div className="flex flex-wrap gap-2 mb-8" style={{ transform: 'translateZ(25px)' }}>
             {project.tech.map((t, idx) => (
               <span
                 key={idx}
@@ -104,7 +104,7 @@ function ProjectCard({ project, onOpenContact, index = 0 }) {
         </div>
 
         {/* Metric Impact & Action CTA with Specular Sheen */}
-        <div className="relative z-10 pt-6 border-t border-white/8 flex items-center justify-between">
+        <div className="relative z-10 pt-6 border-t border-white/8 flex items-center justify-between" style={{ transform: 'translateZ(30px)' }}>
           <div className="flex flex-col">
             <span
               className="font-editorial text-2xl font-bold italic tracking-tight transition-transform duration-300 group-hover:scale-105"

@@ -112,7 +112,7 @@ function DynamicLighting({ activeSection = 'hero' }) {
   const targetRim = useMemo(() => new THREE.Color(), []);
   const targetPoint = useMemo(() => new THREE.Color(), []);
 
-  useFrame(() => {
+  useFrame((state) => {
     const config = LIGHT_CONFIGS[activeSection] || LIGHT_CONFIGS.hero;
 
     targetAmbient.set(config.ambient);
@@ -135,6 +135,8 @@ function DynamicLighting({ activeSection = 'hero' }) {
     if (pointRef.current) {
       pointRef.current.color.lerp(targetPoint, 0.05);
       pointRef.current.intensity = THREE.MathUtils.lerp(pointRef.current.intensity, config.pointIntensity, 0.05);
+      pointRef.current.position.x = THREE.MathUtils.lerp(pointRef.current.position.x, state.pointer.x * 5, 0.05);
+      pointRef.current.position.y = THREE.MathUtils.lerp(pointRef.current.position.y, state.pointer.y * 4 + 2, 0.05);
     }
   });
 
