@@ -85,7 +85,7 @@ export default function Footer({ onOpenContact }) {
                   <span className="text-[10px] text-amber-200">✦</span>
                 </div>
                 <span className="font-editorial text-xl font-semibold tracking-wide text-white">
-                  STAR SOLUTIONS
+                  DEVCORE
                 </span>
               </div>
               <p className="text-sm text-slate-400 font-light leading-relaxed max-w-sm mb-6">
@@ -171,7 +171,7 @@ export default function Footer({ onOpenContact }) {
                 onMouseEnter={() => soundEngine.playRatchetTick(880)}
               >
                 <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-600 ease-out bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none" />
-                <span className="relative z-10">Commission Star Solutions</span>
+                <span className="relative z-10">Commission Devcore</span>
                 <span className="relative z-10 text-sm font-normal group-hover:translate-x-1 transition-transform duration-200">
                   →
                 </span>
@@ -184,7 +184,7 @@ export default function Footer({ onOpenContact }) {
             ref={bottomBarRef}
             className="flex flex-col sm:flex-row items-center justify-between pt-8 border-t border-white/8 gap-4 text-xs text-slate-500 font-light"
           >
-            <p>© {new Date().getFullYear()} Star Solutions Inc. All rights reserved. Crafted with intention.</p>
+            <p>© {new Date().getFullYear()} Devcore Inc. All rights reserved. Crafted with intention.</p>
           </div>
         </div>
       </div>

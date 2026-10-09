@@ -62,7 +62,7 @@ export default function ContactModal({ isOpen, onClose }) {
                     Project Commission
                   </span>
                   <h3 className="font-editorial text-3xl font-semibold text-white">
-                    Partner with <span className="italic text-amber-200">Star Solutions</span>
+                    Partner with <span className="italic text-amber-200">Devcore</span>
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-300 font-light mt-2">
                     Share a few details about your product goals. A partner will be in touch within 24 hours.
@@ -162,7 +162,7 @@ export default function ContactModal({ isOpen, onClose }) {
                   Commission Inscribed
                 </h3>
                 <p className="text-sm text-slate-300 font-light max-w-sm mx-auto">
-                  Thank you, <strong className="text-white font-medium">{formData.name}</strong>. A Star Solutions partner will review your project brief and follow up shortly.
+                  Thank you, <strong className="text-white font-medium">{formData.name}</strong>. A Devcore partner will review your project brief and follow up shortly.
                 </p>
               </motion.div>
             )}

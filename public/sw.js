@@ -76,7 +76,7 @@ self.addEventListener('fetch', (event) => {
               caches.open(DYNAMIC_CACHE).then((cache) => cache.put(request, networkResponse));
             }
           })
-          .catch(() => {/* Ignore network errors offline */});
+          .catch(() => {/* Ignore network errors offline */ });
 
         return cachedResponse;
       }

@@ -34,7 +34,7 @@ export default function BuildIntroHUD({ progress, isBuilt, onSkip }) {
 
         {/* Studio Sub-label & Skip */}
         <div className="flex items-center justify-between w-full pt-0.5 text-[10px] font-mono text-slate-400">
-          <span>STAR SOLUTIONS · SPATIAL WEB</span>
+          <span>DEVCORE · SPATIAL WEB</span>
           <button
             onClick={onSkip}
             className="text-slate-400 hover:text-amber-200 transition-colors uppercase tracking-wider cursor-pointer"

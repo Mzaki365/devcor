@@ -74,11 +74,11 @@ export default function ServiceCard({
       };
 
       let cursor = 0;
-      cursor = typeIn(tagChars.current,         cursor, 0.028);
-      cursor = typeIn(titleChars.current,        cursor + 0.05, 0.024, true);
-      cursor = typeIn(descChars.current,         cursor + 0.04, 0.012);
-      cursor = typeIn(labelChars.current,        cursor + 0.06, 0.032);
-      cursor = typeIn(deliverableChars.current,  cursor + 0.04, 0.010);
+      cursor = typeIn(tagChars.current,         cursor, 0.005);
+      cursor = typeIn(titleChars.current,        cursor + 0.01, 0.004, true);
+      cursor = typeIn(descChars.current,         cursor + 0.01, 0.002);
+      cursor = typeIn(labelChars.current,        cursor + 0.01, 0.005);
+      cursor = typeIn(deliverableChars.current,  cursor + 0.01, 0.001);
     }, el);
 
     return () => ctx.revert();

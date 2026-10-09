@@ -89,7 +89,7 @@ export default function Preloader({ onLoaded }) {
         {/* Top Telemetry Header */}
         <div className="absolute top-6 left-8 flex items-center gap-3 font-mono text-[10px] text-cyan-400/70">
           <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
-          <span>SYS.TELEMETRY // STAR_OS_v4.2</span>
+          <span>SYS.TELEMETRY // DEVCORE_OS_v4.2</span>
         </div>
         <div className="absolute top-6 right-8 font-mono text-[10px] text-slate-500">
           SECURE_BOOT // OK
@@ -134,7 +134,7 @@ export default function Preloader({ onLoaded }) {
             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-[shimmer_2s_infinite]" />
           </div>
           <span className="font-mono text-xl font-bold tracking-widest text-white">
-            STAR <span className="text-cyan-400">SOLUTIONS</span>
+            DEVCORE <span className="text-cyan-400">LABS</span>
           </span>
         </div>
 

@@ -286,7 +286,7 @@ export default function HeroSection({ onExplore, onOpenContact, isLoaded = true 
             soundEngine.playRatchetTick(780 + (idx % 5) * 30);
           }
         }, null, subTime);
-        subTime += 0.042;
+        subTime += 0.012;
       });
 
       // Subtitle finish: hide cursor and guide line
@@ -294,20 +294,20 @@ export default function HeroSection({ onExplore, onOpenContact, isLoaded = true 
         if (subCursorRef.current) {
           subCursorRef.current.style.opacity = '0';
         }
-      }, null, subTime + 0.15);
+      }, null, subTime + 0.08);
 
       if (subLineRef.current) {
         masterTl.to(subLineRef.current, {
           opacity: 0,
-          duration: 0.35,
+          duration: 0.2,
           ease: 'power2.out',
-        }, subTime + 0.15);
+        }, subTime + 0.08);
       }
 
       // ----------------------------------------------------
-      // 5. SECONDARY DESCRIPTION TYPEWRITER REVEAL (3.3s - 6.4s)
+      // 5. SECONDARY DESCRIPTION TYPEWRITER REVEAL (Fast Reveal)
       // ----------------------------------------------------
-      let descTime = Math.max(subTime + 0.25, 3.3);
+      let descTime = Math.max(subTime + 0.1, 1.8);
       descCharRefs.current.forEach((el, idx) => {
         if (!el) return;
         const char = el.textContent || '';
@@ -324,7 +324,7 @@ export default function HeroSection({ onExplore, onOpenContact, isLoaded = true 
           }
         }, null, descTime);
 
-        descTime += isPunctuation ? 0.065 : 0.018;
+        descTime += isPunctuation ? 0.015 : 0.005;
       });
 
       // Description finish: blink then fade cursor
@@ -358,8 +358,8 @@ export default function HeroSection({ onExplore, onOpenContact, isLoaded = true 
   }, [isLoaded]);
 
   const stats = [
-    { value: '50+', label: 'PROJECTS SHIPPED' },
-    { value: '5+', label: 'YEARS BUILDING' },
+    { value: '150+', label: 'PROJECTS SHIPPED' },
+    { value: '8+', label: 'YEARS BUILDING' },
     { value: '100%', label: 'CLIENT RETENTION' },
     { value: '24/7', label: 'SUPPORT' },
   ];
@@ -596,7 +596,7 @@ export default function HeroSection({ onExplore, onOpenContact, isLoaded = true 
       {/* Bottom Horizontal Metrics Bar */}
       <div
         ref={metricsRef}
-        className="relative z-10 w-full max-w-6xl mx-auto pt-8 border-t border-white/10 pointer-events-none mt-10 opacity-0"
+        className="relative z-20 w-full max-w-6xl mx-auto pt-8 pb-4 border-t border-white/10 backdrop-blur-md bg-slate-950/40 rounded-2xl pointer-events-none mt-10 opacity-0"
       >
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center">
           {stats.map((stat, idx) => (

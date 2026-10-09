@@ -230,7 +230,7 @@ export default function MetricsSection() {
           >
             <p className="font-editorial text-lg sm:text-2xl font-light italic text-slate-200 leading-relaxed mb-6">
               <SplitText
-                text="“Star Solutions operates at a caliber rarely seen in modern agencies. Their synthesis of breathtaking 3D design and rock-solid engineering completely elevated our brand presence.”"
+                text="“Devcore operates at a caliber rarely seen in modern agencies. Their synthesis of breathtaking 3D design and rock-solid engineering completely elevated our brand presence.”"
                 delay={0.2}
               />
             </p>

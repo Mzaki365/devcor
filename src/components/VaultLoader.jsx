@@ -263,7 +263,7 @@ export default function VaultLoader({ onComplete }) {
         {/* Intro Brand Tag */}
         <div ref={introTagRef} className="flex flex-col items-center gap-2 text-center px-6">
           <span className="font-plate text-xs sm:text-sm tracking-[0.28em] text-[#c59b56] uppercase font-medium">
-            Star Solutions · Astrometry Calibration
+            Devcore · Astrometry Calibration
           </span>
         </div>
       </div>
