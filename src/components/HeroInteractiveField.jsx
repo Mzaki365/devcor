@@ -5,9 +5,8 @@ import { soundEngine } from '../utils/audio';
  * HeroInteractiveField
  * 
  * Interactive Kinetic Ray / Needle Field & Click Digital Rain / Blast Physics:
- * 1. "TOUCH THE LINES": Matrix of elegant subtle rays/needles that smoothly orient towards cursor.
- * 2. "CLICK & HOLD TO BLAST": Spawns an explosive kinetic shockwave, radiant laser rays,
- *    and cascading glowing rain particles that shower downwards with gravity and trails.
+ * - Full blast physics on tap/click for both desktop and mobile.
+ * - Allows natural vertical touch scrolling (pan-y) so mobile phones scroll smoothly.
  */
 export default function HeroInteractiveField() {
   const canvasRef = useRef(null);
@@ -27,60 +26,74 @@ export default function HeroInteractiveField() {
     let ambientRain = [];
     let animId;
 
+    let isMobile = width < 768;
+
     // 1. Initialize Ambient Floating Rain Droplets
-    const ambientRainCount = 45;
+    const ambientRainCount = isMobile ? 18 : 40;
     for (let i = 0; i < ambientRainCount; i++) {
       ambientRain.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        length: Math.random() * 18 + 10,
-        speedY: Math.random() * 2.5 + 1.2,
-        speedX: (Math.random() - 0.5) * 0.4,
-        alpha: Math.random() * 0.35 + 0.1,
-        width: Math.random() * 1.2 + 0.5,
+        length: Math.random() * 16 + 8,
+        speedY: Math.random() * 2.2 + 1.0,
+        speedX: (Math.random() - 0.5) * 0.3,
+        alpha: Math.random() * 0.3 + 0.1,
+        width: Math.random() * 1.0 + 0.5,
       });
     }
 
-    // 2. Grid of Interactive Lines/Needles ("TOUCH THE LINES")
-    const spacing = 48;
-    const lineLen = 14;
+    // 2. Grid spacing: larger spacing on mobile to optimize performance
+    let spacing = isMobile ? 64 : 48;
+    let lineLen = isMobile ? 10 : 14;
 
     const handleResize = () => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
+      isMobile = width < 768;
+      spacing = isMobile ? 64 : 48;
+      lineLen = isMobile ? 10 : 14;
     };
     window.addEventListener('resize', handleResize, { passive: true });
 
-    // Spawn Burst & Digital Rain Cascade on Click / Blast
-    const triggerBlast = (x, y, intensity = 1.0) => {
+    // Spawn Burst & Digital Rain Cascade on Click / Tap Blast
+    const triggerBlast = (x, y, intensity = 1.0, isTouch = false) => {
+      const actualIntensity = isTouch ? intensity * 0.7 : intensity;
+
       // 1. Shockwave ring
-      shockwaves.push({
-        x,
-        y,
-        radius: 4,
-        maxRadius: Math.min(width, height) * 0.45 * intensity,
-        alpha: 0.9,
-        speed: 9 * intensity,
-      });
+      if (shockwaves.length < 4) {
+        shockwaves.push({
+          x,
+          y,
+          radius: 4,
+          maxRadius: Math.min(width, height) * (isTouch ? 0.3 : 0.4) * actualIntensity,
+          alpha: 0.9,
+          speed: (isTouch ? 7 : 9) * actualIntensity,
+        });
+      }
 
       // 2. High-speed radiant sparks & rain trails
-      const count = Math.floor(40 * intensity);
+      const count = Math.floor((isTouch ? 16 : 32) * actualIntensity);
       for (let i = 0; i < count; i++) {
         const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 9 + 4;
+        const speed = Math.random() * 8 + 3;
         const hue = Math.random() > 0.4 ? '#ffffff' : Math.random() > 0.5 ? '#dfb776' : '#38bdf8';
         particles.push({
           x,
           y,
           vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed - 2.5, // slight upward initial burst
-          gravity: 0.22,
-          length: Math.random() * 22 + 12,
+          vy: Math.sin(angle) * speed - 2.0,
+          gravity: 0.2,
+          length: Math.random() * 18 + 10,
           alpha: 1.0,
-          decay: Math.random() * 0.02 + 0.015,
+          decay: Math.random() * 0.03 + 0.02,
           color: hue,
-          size: Math.random() * 2.0 + 0.8,
+          size: Math.random() * 1.8 + 0.8,
         });
+      }
+
+      // Cap maximum active particles to prevent lag
+      if (particles.length > 50) {
+        particles.splice(0, particles.length - 50);
       }
 
       // Audio cue
@@ -103,8 +116,15 @@ export default function HeroInteractiveField() {
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      isHoldingRef.current = true;
-      triggerBlast(x, y, 1.2);
+      const isTouch = e.pointerType === 'touch';
+
+      // Always trigger blast effect on tap/click
+      triggerBlast(x, y, 1.1, isTouch);
+
+      // On mouse desktop: enable continuous hold blast
+      if (!isTouch) {
+        isHoldingRef.current = true;
+      }
     };
 
     const handlePointerUp = () => {
@@ -120,16 +140,17 @@ export default function HeroInteractiveField() {
       const my = mouseRef.current.y;
       const isOver = mouseRef.current.isOver;
 
-      // Continuous blast on click & hold
-      if (isHoldingRef.current && isOver && time - lastHoldTime > 140) {
+      // Continuous blast on mouse click & hold (desktop only)
+      if (isHoldingRef.current && isOver && time - lastHoldTime > 150) {
         lastHoldTime = time;
-        triggerBlast(mx, my, 0.75);
+        triggerBlast(mx, my, 0.6, false);
       }
 
       // ----------------------------------------------------
       // A. Ambient Digital Rain Droplets
       // ----------------------------------------------------
-      ambientRain.forEach((drop) => {
+      for (let i = 0; i < ambientRain.length; i++) {
+        const drop = ambientRain[i];
         drop.y += drop.speedY;
         drop.x += drop.speedX;
 
@@ -146,14 +167,14 @@ export default function HeroInteractiveField() {
         ctx.moveTo(drop.x, drop.y);
         ctx.lineTo(drop.x + drop.speedX * 2, drop.y + drop.length);
         ctx.stroke();
-      });
+      }
 
       // ----------------------------------------------------
       // B. Top Sunburst Radial Ray Lines
       // ----------------------------------------------------
       const sunCenterX = width * 0.5;
       const sunCenterY = -40;
-      const rayCount = 28;
+      const rayCount = isMobile ? 16 : 28;
       const baseRayRadius = 140;
 
       for (let i = 0; i < rayCount; i++) {
@@ -191,9 +212,10 @@ export default function HeroInteractiveField() {
           if (isOver) {
             const dx = mx - gx;
             const dy = my - gy;
-            const dist = Math.sqrt(dx * dx + dy * dy);
+            const distSq = dx * dx + dy * dy;
 
-            if (dist < 260) {
+            if (distSq < 67600) { // 260px radius
+              const dist = Math.sqrt(distSq);
               const factor = 1 - dist / 260;
               // Orient toward pointer
               angle = Math.atan2(dy, dx);
@@ -223,15 +245,15 @@ export default function HeroInteractiveField() {
       for (let i = shockwaves.length - 1; i >= 0; i--) {
         const sw = shockwaves[i];
         sw.radius += sw.speed;
-        sw.alpha -= 0.022;
+        sw.alpha -= 0.025;
 
         if (sw.alpha <= 0 || sw.radius >= sw.maxRadius) {
           shockwaves.splice(i, 1);
           continue;
         }
 
-        ctx.strokeStyle = `rgba(223, 183, 118, ${sw.alpha * 0.7})`;
-        ctx.lineWidth = 1.5;
+        ctx.strokeStyle = `rgba(223, 183, 118, ${sw.alpha * 0.75})`;
+        ctx.lineWidth = 1.4;
         ctx.beginPath();
         ctx.arc(sw.x, sw.y, sw.radius, 0, Math.PI * 2);
         ctx.stroke();
@@ -244,7 +266,7 @@ export default function HeroInteractiveField() {
       }
 
       // ----------------------------------------------------
-      // E. Click Blast Rain Particles Shower
+      // E. Click / Tap Blast Rain Particles Shower
       // ----------------------------------------------------
       for (let i = particles.length - 1; i >= 0; i--) {
         const p = particles[i];
@@ -259,8 +281,8 @@ export default function HeroInteractiveField() {
         }
 
         // Particle rain streak
-        const tailX = p.x - p.vx * 1.8;
-        const tailY = p.y - p.vy * 1.8;
+        const tailX = p.x - p.vx * 1.6;
+        const tailY = p.y - p.vy * 1.6;
 
         ctx.strokeStyle = p.color;
         ctx.globalAlpha = p.alpha;
@@ -284,10 +306,10 @@ export default function HeroInteractiveField() {
     animId = requestAnimationFrame(render);
 
     const canvasEl = canvas;
-    canvasEl.addEventListener('pointermove', handlePointerMove);
-    canvasEl.addEventListener('pointerleave', handlePointerLeave);
-    canvasEl.addEventListener('pointerdown', handlePointerDown);
-    window.addEventListener('pointerup', handlePointerUp);
+    canvasEl.addEventListener('pointermove', handlePointerMove, { passive: true });
+    canvasEl.addEventListener('pointerleave', handlePointerLeave, { passive: true });
+    canvasEl.addEventListener('pointerdown', handlePointerDown, { passive: true });
+    window.addEventListener('pointerup', handlePointerUp, { passive: true });
 
     return () => {
       cancelAnimationFrame(animId);
@@ -303,7 +325,7 @@ export default function HeroInteractiveField() {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full pointer-events-auto cursor-crosshair z-0"
-      style={{ touchAction: 'none' }}
+      style={{ touchAction: 'pan-y' }}
     />
   );
 }
