@@ -51,12 +51,16 @@ function SectionModel({ activeSection }) {
   const lerpRotY = useRef(DEFAULT.rotY);
   const spinY = useRef(0);
 
-  useFrame((_, delta) => {
+  useFrame((state, delta) => {
     const cfg = SECTION_CONFIG[activeSection] || DEFAULT;
     const g = groupRef.current;
     if (!g) return;
 
     const spd = 1.8 * delta;
+
+    // Mouse Pointer Parallax Physics
+    const targetMouseX = (state.pointer.x * Math.PI) / 10;
+    const targetMouseY = (state.pointer.y * Math.PI) / 12;
 
     // Lerp position
     lerpPos.current.lerp(new THREE.Vector3(...cfg.pos), spd);
@@ -66,11 +70,12 @@ function SectionModel({ activeSection }) {
     lerpScale.current = THREE.MathUtils.lerp(lerpScale.current, cfg.scale, spd);
     g.scale.setScalar(lerpScale.current);
 
-    // Base rotation lerp + continuous slow spin
+    // Base rotation lerp + continuous slow spin + mouse tilt
     lerpRotY.current = THREE.MathUtils.lerp(lerpRotY.current, cfg.rotY, spd);
     spinY.current += delta * 0.18;
-    g.rotation.y = lerpRotY.current + spinY.current;
-    g.rotation.x = Math.sin(spinY.current * 0.6) * 0.07;
+
+    g.rotation.y = THREE.MathUtils.lerp(g.rotation.y, lerpRotY.current + spinY.current + targetMouseX, 0.05);
+    g.rotation.x = THREE.MathUtils.lerp(g.rotation.x, Math.sin(spinY.current * 0.6) * 0.07 - targetMouseY, 0.05);
 
     // Opacity on all meshes
     g.traverse(child => {

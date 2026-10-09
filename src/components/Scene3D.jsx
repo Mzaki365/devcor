@@ -1,10 +1,12 @@
 import React, { Suspense, useState, useEffect, useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { PerspectiveCamera, Preload, AdaptiveDpr, AdaptiveEvents } from '@react-three/drei';
+import { PerspectiveCamera, Preload, AdaptiveDpr, AdaptiveEvents, Environment } from '@react-three/drei';
+import { EffectComposer, Bloom, Vignette } from '@react-three/postprocessing';
 import * as THREE from 'three';
 import ArmillaryAstrolabe from './ArmillaryAstrolabe';
 import CameraController from './CameraController';
 import SceneModels from './SceneModels';
+import GalaxyParticles from './GalaxyParticles';
 
 const LIGHT_CONFIGS = {
   hero: {
@@ -230,18 +232,38 @@ export default function Scene3D({
           {/* Physically-based Dynamic Studio Lighting per section */}
           <DynamicLighting activeSection={activeService} />
 
+          {/* Photorealistic HDRI Environment Lighting */}
+          <Environment preset="city" />
+
+          {/* 3D Floating Galaxy Constellation Particles */}
+          <GalaxyParticles count={isMobile ? 1200 : 2600} activeService={activeService} color={themeColor} />
+
           <Suspense fallback={null}>
-            {/* 3D Brass Armillary Astrolabe Centerpiece with Real-time Morphing */}
+            {/* 3D Cyber Crystal Orb Centerpiece */}
             <ArmillaryAstrolabe
               isLoaded={isLoaded}
               activeService={activeService}
             />
 
-            {/* Section-reactive GLTF model — floats & lerps per scroll section */}
-            <SceneModels activeSection={activeService} />
+            {/* Section-reactive GLTF model — isolated so network fetching never blocks 3D scene */}
+            <Suspense fallback={null}>
+              <SceneModels activeSection={activeService} />
+            </Suspense>
 
             <Preload all />
           </Suspense>
+
+          {/* Post-Processing Cinematic Bloom & Vignette */}
+          {!isMobile && (
+            <EffectComposer disableNormalPass>
+              <Bloom
+                intensity={0.65}
+                luminanceThreshold={0.6}
+                luminanceSmoothing={0.85}
+              />
+              <Vignette offset={0.3} darkness={0.65} />
+            </EffectComposer>
+          )}
         </Canvas>
       </div>
     </WebGLFallbackBoundary>
