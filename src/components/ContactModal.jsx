@@ -39,7 +39,7 @@ export default function ContactModal({ isOpen, onClose }) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.94, y: 15 }}
             transition={TRANSITIONS.escapement}
-            className="relative w-full max-w-lg p-8 sm:p-10 rounded-3xl bg-slate-900/95 border border-amber-300/30 shadow-[0_25px_60px_rgba(0,0,0,0.9),0_0_40px_rgba(226,201,146,0.15)] overflow-hidden"
+            className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto p-5 sm:p-10 rounded-3xl bg-slate-900/95 border border-amber-300/30 shadow-[0_25px_60px_rgba(0,0,0,0.9),0_0_40px_rgba(226,201,146,0.15)]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Hairline Outer Frame Engraving */}

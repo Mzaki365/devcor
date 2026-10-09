@@ -224,7 +224,7 @@ export default function VaultLoader({ onComplete }) {
         className={`absolute inset-0 flex flex-col items-center justify-center p-6 transition-opacity duration-300 ${phase === 'manifesto' ? 'pointer-events-none' : ''
           }`}
       >
-        <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center mb-8">
+        <div className="relative w-56 h-56 sm:w-80 sm:h-80 flex items-center justify-center mb-8">
           {/* Ring 1: Meridian Degree Circle */}
           <div
             ref={astrolabeRing1}
@@ -291,7 +291,7 @@ export default function VaultLoader({ onComplete }) {
         <div className="relative z-10 my-auto flex items-center justify-center text-center w-full">
           <h1
             ref={wordRef}
-            className="font-astronomy text-6xl sm:text-8xl md:text-9xl lg:text-[10.5rem] font-normal italic tracking-tight text-[#f4eee2] drop-shadow-[0_4px_30px_rgba(255,255,255,0.12)] will-change-transform"
+            className="font-astronomy text-5xl xs:text-6xl sm:text-8xl md:text-9xl lg:text-[10.5rem] font-normal italic tracking-tight text-[#f4eee2] drop-shadow-[0_4px_30px_rgba(255,255,255,0.12)] will-change-transform"
           >
             Design.
           </h1>

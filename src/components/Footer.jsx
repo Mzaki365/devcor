@@ -75,7 +75,7 @@ export default function Footer({ onOpenContact }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div
           ref={cardContainerRef}
-          className="p-8 sm:p-14 rounded-3xl bg-slate-950/70 backdrop-blur-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
+          className="p-5 sm:p-14 rounded-3xl bg-slate-950/70 backdrop-blur-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
             {/* Column 1 & 2: Brand Identity */}

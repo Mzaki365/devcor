@@ -203,7 +203,7 @@ export default function MetricsSection() {
   return (
     <section ref={sectionRef} className="py-24 relative" id="about">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="p-8 sm:p-14 rounded-3xl bg-slate-950/70 backdrop-blur-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] pointer-events-auto">
+        <div className="p-5 sm:p-14 rounded-3xl bg-slate-950/70 backdrop-blur-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] pointer-events-auto">
           {/* Section Header */}
           <div ref={headerRef} className="text-center max-w-2xl mx-auto mb-16">
             <span className="inline-block px-4 py-1 rounded-full bg-white/[0.03] border border-amber-300/30 text-xs font-mono text-amber-200 uppercase tracking-wider mb-4">

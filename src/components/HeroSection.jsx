@@ -388,18 +388,17 @@ export default function HeroSection({ onExplore, onOpenContact, isLoaded = true 
         </div>
 
         {/* 1. MASTER DEVCORE HEADING WITH TYPEWRITER LETTER-BY-LETTER REVEAL */}
-        <div className="relative inline-block overflow-visible mb-4">
+        <div className="relative inline-block overflow-visible mb-4 max-w-full">
           <h1
             ref={titleContainerRef}
-            className="font-sans font-black text-6xl sm:text-7xl md:text-8xl lg:text-[7.8rem] xl:text-[8.5rem] tracking-tight uppercase leading-none drop-shadow-[0_15px_35px_rgba(0,0,0,0.9)] select-none flex items-center justify-center relative"
+            className="font-sans font-black text-4xl xs:text-5xl sm:text-7xl md:text-8xl lg:text-[7.8rem] xl:text-[8.5rem] tracking-tight uppercase leading-none drop-shadow-[0_15px_35px_rgba(0,0,0,0.9)] select-none flex items-center justify-center relative flex-wrap"
           >
             {letters.map((item, idx) => (
               <span
                 key={idx}
                 ref={(el) => (letterRefs.current[idx] = el)}
-                className={`inline-block relative transition-colors duration-200 opacity-0 ${
-                  item.isCore ? 'text-[#dfb776]' : 'text-white'
-                } ${idx === 3 ? 'ml-0.5 sm:ml-1 md:ml-2' : ''}`}
+                className={`inline-block relative transition-colors duration-200 opacity-0 ${item.isCore ? 'text-[#dfb776]' : 'text-white'
+                  } ${idx === 3 ? 'ml-0.5 sm:ml-1 md:ml-2' : ''}`}
               >
                 {item.char}
               </span>

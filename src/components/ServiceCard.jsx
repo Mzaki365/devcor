@@ -88,7 +88,7 @@ export default function ServiceCard({
     <div ref={containerRef}>
       <div
         ref={cardRef}
-        className={`relative w-full max-w-xl p-8 sm:p-12 rounded-3xl bg-slate-950/80 backdrop-blur-2xl border transition-all duration-500 cursor-pointer pointer-events-auto group overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] ${
+        className={`relative w-full max-w-xl p-5 sm:p-12 rounded-3xl bg-slate-950/80 backdrop-blur-2xl border transition-all duration-500 cursor-pointer pointer-events-auto group overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] ${
           isSelected
             ? `${service.borderColor} ${service.glowShadow} scale-[1.01]`
             : 'border-white/10 hover:border-amber-300/40'
@@ -126,7 +126,7 @@ export default function ServiceCard({
         />
 
         {/* ── Top meta ─────────────────────────────────────────────────── */}
-        <div className="relative z-10 flex items-center justify-between mb-8">
+        <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 mb-6 sm:mb-8">
           <div className="flex items-center gap-3">
             <div
               className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center bg-white/[0.04] text-xs font-serif group-hover:border-amber-300/40 group-hover:rotate-45 transition-all duration-300 shadow-sm"
@@ -140,7 +140,7 @@ export default function ServiceCard({
           </div>
 
           {/* Tag — typewriter */}
-          <span className="font-mono text-xs text-slate-400 uppercase tracking-widest px-3.5 py-1 rounded-full bg-white/[0.03] border border-white/8 group-hover:border-amber-300/20 transition-colors">
+          <span className="font-mono text-[10px] sm:text-xs text-slate-400 uppercase tracking-widest px-3 py-1 rounded-full bg-white/[0.03] border border-white/8 group-hover:border-amber-300/20 transition-colors">
             <TypewriterText text={service.tag} charRefs={tagChars} />
           </span>
         </div>

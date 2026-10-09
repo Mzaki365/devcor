@@ -99,11 +99,13 @@ export default function ServicesSection({ onSelectService, activeService, onOpen
         );
       }
 
+      const isMobileScreen = window.innerWidth < 768;
+
       // 2. Card 1 (Web): Pulled from Left with -3.5° rotation settle
       if (card1WrapperRef.current) {
         gsap.fromTo(
           card1WrapperRef.current,
-          { opacity: 0, x: -140, y: 30, rotate: -3.5, scale: 0.95 },
+          { opacity: 0, x: isMobileScreen ? 0 : -140, y: isMobileScreen ? 40 : 30, rotate: isMobileScreen ? 0 : -3.5, scale: 0.95 },
           {
             opacity: 1,
             x: 0,
@@ -114,7 +116,7 @@ export default function ServicesSection({ onSelectService, activeService, onOpen
             ease: GSAP_EASES.escapement,
             scrollTrigger: {
               trigger: card1WrapperRef.current,
-              start: 'top 80%',
+              start: 'top 85%',
               toggleActions: 'play reverse play reverse',
             },
           }
@@ -125,7 +127,7 @@ export default function ServicesSection({ onSelectService, activeService, onOpen
       if (card2WrapperRef.current) {
         gsap.fromTo(
           card2WrapperRef.current,
-          { opacity: 0, x: 140, y: 30, rotate: 4.2, scale: 0.95 },
+          { opacity: 0, x: isMobileScreen ? 0 : 140, y: isMobileScreen ? 40 : 30, rotate: isMobileScreen ? 0 : 4.2, scale: 0.95 },
           {
             opacity: 1,
             x: 0,
@@ -136,7 +138,7 @@ export default function ServicesSection({ onSelectService, activeService, onOpen
             ease: GSAP_EASES.escapement,
             scrollTrigger: {
               trigger: card2WrapperRef.current,
-              start: 'top 80%',
+              start: 'top 85%',
               toggleActions: 'play reverse play reverse',
             },
           }
@@ -147,7 +149,7 @@ export default function ServicesSection({ onSelectService, activeService, onOpen
       if (card3WrapperRef.current) {
         gsap.fromTo(
           card3WrapperRef.current,
-          { opacity: 0, x: -120, y: 60, rotate: -2.8, scale: 0.95 },
+          { opacity: 0, x: isMobileScreen ? 0 : -120, y: 60, rotate: isMobileScreen ? 0 : -2.8, scale: 0.95 },
           {
             opacity: 1,
             x: 0,
@@ -158,7 +160,7 @@ export default function ServicesSection({ onSelectService, activeService, onOpen
             ease: GSAP_EASES.escapement,
             scrollTrigger: {
               trigger: card3WrapperRef.current,
-              start: 'top 80%',
+              start: 'top 85%',
               toggleActions: 'play reverse play reverse',
             },
           }

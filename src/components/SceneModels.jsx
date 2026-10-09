@@ -11,23 +11,23 @@ useGLTF.preload(`${CDN}/models/gltf/FlightHelmet/glTF/FlightHelmet.gltf`);
 
 // ── Per-section config: position, scale, rotation, opacity ────────────────
 const SECTION_CONFIG = {
-  hero:     { pos: [ 3.2, -0.2,  1.0 ], scale: 0.72, rotY:  0.4,  opacity: 1   },
-  services: { pos: [-3.0,  0.2,  0.5 ], scale: 0.60, rotY: -0.3,  opacity: 0.8 },
-  web:      { pos: [ 2.8, -0.4,  0.6 ], scale: 0.65, rotY:  0.5,  opacity: 1   },
-  app:      { pos: [-2.6,  0.3,  0.4 ], scale: 0.55, rotY: -0.6,  opacity: 0.9 },
-  crm:      { pos: [ 2.4, -0.2,  0.3 ], scale: 0.58, rotY:  0.3,  opacity: 0.9 },
-  work:     { pos: [-3.0,  0.0,  0.5 ], scale: 0.60, rotY: -0.4,  opacity: 0.85},
-  tech:     { pos: [ 2.6,  0.1,  0.4 ], scale: 0.55, rotY:  0.6,  opacity: 0.8 },
-  footer:   { pos: [ 0.0,  0.0,  0.0 ], scale: 0.01, rotY:  0,    opacity: 0   },
+  hero: { pos: [3.2, -0.2, 1.0], scale: 0.72, rotY: 0.4, opacity: 1 },
+  services: { pos: [-3.0, 0.2, 0.5], scale: 0.60, rotY: -0.3, opacity: 0.8 },
+  web: { pos: [2.8, -0.4, 0.6], scale: 0.65, rotY: 0.5, opacity: 1 },
+  app: { pos: [-2.6, 0.3, 0.4], scale: 0.55, rotY: -0.6, opacity: 0.9 },
+  crm: { pos: [2.4, -0.2, 0.3], scale: 0.58, rotY: 0.3, opacity: 0.9 },
+  work: { pos: [-3.0, 0.0, 0.5], scale: 0.60, rotY: -0.4, opacity: 0.85 },
+  tech: { pos: [2.6, 0.1, 0.4], scale: 0.55, rotY: 0.6, opacity: 0.8 },
+  footer: { pos: [0.0, 0.0, 0.0], scale: 0.01, rotY: 0, opacity: 0 },
 };
 
 const DEFAULT = SECTION_CONFIG.hero;
 
 // ── Single GLTF model with lerped section-reactive transform ──────────────
 function SectionModel({ activeSection }) {
-  const { scene } = useGLTF(`${CDN}/models/gltf/FlightHelmet/glTF/FlightHelmet.gltf`);
-  const groupRef  = useRef();
-  const cloned    = useMemo(() => {
+  const { scene } = useGLTF(`${CDN}/models/gltf/DamagedHelmet/glTF/DamagedHelmet.gltf`);
+  const groupRef = useRef();
+  const cloned = useMemo(() => {
     const c = scene.clone(true);
     // Automatically center and normalize model bounding box so size is crisp & consistent
     const box = new THREE.Box3().setFromObject(c);
@@ -46,14 +46,14 @@ function SectionModel({ activeSection }) {
   }, [scene]);
 
   // Lerp targets
-  const lerpPos   = useRef(new THREE.Vector3(...DEFAULT.pos));
+  const lerpPos = useRef(new THREE.Vector3(...DEFAULT.pos));
   const lerpScale = useRef(DEFAULT.scale);
-  const lerpRotY  = useRef(DEFAULT.rotY);
-  const spinY     = useRef(0);
+  const lerpRotY = useRef(DEFAULT.rotY);
+  const spinY = useRef(0);
 
   useFrame((_, delta) => {
     const cfg = SECTION_CONFIG[activeSection] || DEFAULT;
-    const g   = groupRef.current;
+    const g = groupRef.current;
     if (!g) return;
 
     const spd = 1.8 * delta;
@@ -67,10 +67,10 @@ function SectionModel({ activeSection }) {
     g.scale.setScalar(lerpScale.current);
 
     // Base rotation lerp + continuous slow spin
-    lerpRotY.current  = THREE.MathUtils.lerp(lerpRotY.current, cfg.rotY, spd);
-    spinY.current    += delta * 0.18;
-    g.rotation.y      = lerpRotY.current + spinY.current;
-    g.rotation.x      = Math.sin(spinY.current * 0.6) * 0.07;
+    lerpRotY.current = THREE.MathUtils.lerp(lerpRotY.current, cfg.rotY, spd);
+    spinY.current += delta * 0.18;
+    g.rotation.y = lerpRotY.current + spinY.current;
+    g.rotation.x = Math.sin(spinY.current * 0.6) * 0.07;
 
     // Opacity on all meshes
     g.traverse(child => {

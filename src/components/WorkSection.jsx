@@ -19,16 +19,17 @@ function ProjectCard({ project, onOpenContact, index = 0 }) {
 
     const isLeft = index % 2 === 0;
     const isTop = index < 2;
+    const isMobileScreen = window.innerWidth < 768;
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
         wrapper,
         {
           opacity: 0,
-          x: isLeft ? 100 : -100,
+          x: isMobileScreen ? 0 : (isLeft ? 100 : -100),
           y: isTop ? -60 : 60,
           scale: 0.85,
-          rotate: isLeft ? 2.5 : -2.5,
+          rotate: isMobileScreen ? 0 : (isLeft ? 2.5 : -2.5),
         },
         {
           opacity: 1,
@@ -56,7 +57,7 @@ function ProjectCard({ project, onOpenContact, index = 0 }) {
       <div
         ref={cardRef}
         data-cursor="view"
-        className="relative flex flex-col justify-between p-8 sm:p-10 rounded-3xl bg-slate-950/75 backdrop-blur-2xl border border-white/10 hover:border-amber-300/40 transition-colors duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.6)] group pointer-events-auto overflow-hidden min-h-[440px] cursor-pointer"
+        className="relative flex flex-col justify-between p-5 sm:p-10 rounded-3xl bg-slate-950/75 backdrop-blur-2xl border border-white/10 hover:border-amber-300/40 transition-colors duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.6)] group pointer-events-auto overflow-hidden min-h-[380px] sm:min-h-[440px] cursor-pointer"
         style={{
           transformStyle: 'preserve-3d',
         }}
