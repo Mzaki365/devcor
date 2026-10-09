@@ -8,6 +8,7 @@ import ReticleCursor from './components/ReticleCursor';
 import DialScrollHUD from './components/DialScrollHUD';
 import Footer from './components/Footer';
 import OfflineHUD from './components/OfflineHUD';
+import ScrollToTopButton from './components/ScrollToTopButton';
 import { scrollDirector } from './utils/scrollDirector';
 
 // Lazy-load below-the-fold sections
@@ -131,6 +132,9 @@ function App() {
           <Footer onOpenContact={() => setIsContactOpen(true)} />
         </Suspense>
       </main>
+
+      {/* Floating Side Scroll To Top Button */}
+      <ScrollToTopButton />
 
       {/* 8. Archival Commission Brief Modal */}
       <Suspense fallback={null}>

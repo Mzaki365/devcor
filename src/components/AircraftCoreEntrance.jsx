@@ -626,8 +626,8 @@ export default function AircraftCoreEntrance({ onComplete, isReady = true }) {
           <line x1="105" y1="38" x2="155" y2="50" stroke="#475569" strokeWidth="2.5" strokeLinecap="round" />
         </svg>
 
-        <span className="font-mono text-[9.5px] text-[#00f0ff] tracking-[0.25em] uppercase font-bold mt-1 drop-shadow-[0_0_8px_#00f0ff]">
-          TACTICAL FLIGHT HELMET CORE
+        <span className="font-mono text-[10px] text-[#dfb776] tracking-[0.3em] uppercase font-bold mt-2 drop-shadow-[0_0_10px_rgba(223,183,118,0.7)]">
+          DESIGN · BUILD · SHIP
         </span>
       </div>
 
