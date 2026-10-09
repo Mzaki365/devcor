@@ -25,9 +25,25 @@ const DEFAULT = SECTION_CONFIG.hero;
 
 // ── Single GLTF model with lerped section-reactive transform ──────────────
 function SectionModel({ activeSection }) {
-  const { scene } = useGLTF(`${CDN}/models/gltf/DamagedHelmet/glTF/DamagedHelmet.gltf`);
+  const { scene } = useGLTF(`${CDN}/models/gltf/FlightHelmet/glTF/FlightHelmet.gltf`);
   const groupRef  = useRef();
-  const cloned    = useMemo(() => scene.clone(true), [scene]);
+  const cloned    = useMemo(() => {
+    const c = scene.clone(true);
+    // Automatically center and normalize model bounding box so size is crisp & consistent
+    const box = new THREE.Box3().setFromObject(c);
+    const size = new THREE.Vector3();
+    box.getSize(size);
+    const maxDim = Math.max(size.x, size.y, size.z);
+    if (maxDim > 0) {
+      const targetUnitSize = 2.5;
+      const normalizeScale = targetUnitSize / maxDim;
+      c.scale.setScalar(normalizeScale);
+      const center = new THREE.Vector3();
+      box.getCenter(center);
+      c.position.sub(center.multiplyScalar(normalizeScale));
+    }
+    return c;
+  }, [scene]);
 
   // Lerp targets
   const lerpPos   = useRef(new THREE.Vector3(...DEFAULT.pos));
