@@ -5,6 +5,7 @@ import { useMagnetic } from '../hooks/useMagnetic';
 import { soundEngine } from '../utils/audio';
 import { prefersReducedMotion } from '../config/motionSystem';
 import HeroInteractiveField from './HeroInteractiveField';
+import MechanicalOdometer from './MechanicalOdometer';
 
 // Heading letters configuration: DEV in white, CORE in signature golden brass (#dfb776)
 const letters = [
@@ -358,10 +359,10 @@ export default function HeroSection({ onExplore, onOpenContact, isLoaded = true 
   }, [isLoaded]);
 
   const stats = [
-    { value: '150+', label: 'PROJECTS SHIPPED' },
-    { value: '8+', label: 'YEARS BUILDING' },
-    { value: '100%', label: 'CLIENT RETENTION' },
-    { value: '24/7', label: 'SUPPORT' },
+    { num: 150, suffix: '+', label: 'PROJECTS SHIPPED' },
+    { num: 8, suffix: '+', label: 'YEARS BUILDING' },
+    { num: 100, suffix: '%', label: 'CLIENT RETENTION' },
+    { text: '24/7', label: 'SUPPORT' },
   ];
 
   return (
@@ -593,7 +594,7 @@ export default function HeroSection({ onExplore, onOpenContact, isLoaded = true 
         </div>
       </motion.div>
 
-      {/* Bottom Horizontal Metrics Bar */}
+      {/* Bottom Horizontal Metrics Bar with Odometer Count-Up Animation */}
       <div
         ref={metricsRef}
         className="relative z-20 w-full max-w-6xl mx-auto pt-8 pb-4 border-t border-white/10 backdrop-blur-md bg-slate-950/40 rounded-2xl pointer-events-none mt-10 opacity-0"
@@ -602,7 +603,11 @@ export default function HeroSection({ onExplore, onOpenContact, isLoaded = true 
           {stats.map((stat, idx) => (
             <div key={idx} className="flex flex-col items-center">
               <span className="font-sans font-black text-2xl sm:text-3xl md:text-4xl text-white italic tracking-tight mb-1">
-                {stat.value}
+                {stat.num !== undefined ? (
+                  <MechanicalOdometer value={stat.num} suffix={stat.suffix} duration={1.8} />
+                ) : (
+                  stat.text
+                )}
               </span>
               <span className="font-mono text-[10px] sm:text-xs text-zinc-400 uppercase tracking-widest">
                 {stat.label}
